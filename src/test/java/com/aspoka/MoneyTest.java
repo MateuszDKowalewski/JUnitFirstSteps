@@ -7,16 +7,56 @@ public class MoneyTest {
 
 
     @Test
-    public void testEquals() {
-        Assert.assertTrue(Money.dollar(5).equals(Money.dollar(5)));
-        Assert.assertFalse(Money.dollar(5).equals(Money.dollar(6)));
-        Assert.assertFalse(Money.dollar(5).equals(Money.franc(5)));
+    public void shouldReturnTrueForTheSameMoney() {
+        // given
+        Money first = Money.dollar(5);
+        Money second = Money.dollar(5);
+
+        // when
+        boolean result = first.equals(second);
+
+        // then
+        Assert.assertTrue(result);
     }
 
     @Test
-    public void testCurrency() {
-        Assert.assertEquals("USD", Money.dollar(1).getCurrency());
-        Assert.assertEquals("CHF", Money.franc(1).getCurrency());
+    public void shouldReturnFalseForDifferentAmount() {
+        // given
+        Money first = Money.dollar(5);
+        Money second = Money.dollar(6);
+
+        // when
+        boolean result = first.equals(second);
+
+        // then
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void shouldReturnFalseForDifferentCurrency() {
+        // given
+        Money first = Money.dollar(5);
+        Money second = Money.franc(5);
+
+        // when
+        boolean result = first.equals(second);
+
+        // then
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void shouldReturnTrueForTheSameCurrencyCode() {
+        // given
+        Money dollar = Money.dollar(1);
+        String expected = "USD";
+
+        // when
+        boolean result = dollar.getCurrency().equals(expected);
+
+        // then
+        Assert.assertTrue(result);
+
     }
 
     @Test
